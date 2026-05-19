@@ -27,7 +27,8 @@ Route::prefix('v1')->group(function () {
     Route::post('/comments/{id}/reply', [CommentController::class, 'reply']);
 
     // Subscribers
-    Route::apiResource('subscribers', SubscriberController::class);
+   
+    Route::post('/subscribe', [SubscriberController::class, 'subscribe']);
 
     // Contacts
     Route::post('/contact', [ContactController::class, 'store']);
