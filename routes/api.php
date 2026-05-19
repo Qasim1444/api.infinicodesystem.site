@@ -7,9 +7,8 @@ use App\Http\Controllers\Api\{
     CategoryController,
     TagController,
     CommentController,
-    TestimonialController,
-    TeamMemberController,
-    SubscriberController
+    SubscriberController,
+    ContactController
 };
 
 Route::prefix('v1')->group(function () {
@@ -27,14 +26,11 @@ Route::prefix('v1')->group(function () {
     Route::post('/comments/{id}/like', [CommentController::class, 'like']);
     Route::post('/comments/{id}/reply', [CommentController::class, 'reply']);
 
-    // Testimonials
-    Route::apiResource('testimonials', TestimonialController::class);
-
-    // Team Members
-    Route::apiResource('team-members', TeamMemberController::class);
-
     // Subscribers
     Route::apiResource('subscribers', SubscriberController::class);
+
+    // Contacts
+    Route::post('/contact', [ContactController::class, 'store']);
 
 });
 

@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Testimonial extends Model
+class Contact extends Model
 {
     protected $fillable = [
         'name',
-        'position',
-        'quote',
-        'image',
-        'rating',
+        'email',
+        'subject',
+        'message',
+        'subscribe',
     ];
 }

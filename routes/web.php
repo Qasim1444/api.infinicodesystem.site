@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\CommentController;
+use App\Http\Controllers\Api\SubscriberController;
 
 Route::prefix('v1')->group(function () {
     Route::get('/posts', [PostController::class, 'index']);
@@ -17,6 +18,8 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('tags', TagController::class);
     Route::apiResource('comments', CommentController::class)->only(['index', 'store', 'show', 'destroy']);
     Route::patch('comments/{comment}/approve', [CommentController::class, 'approve']);
+
+    Route::post('/subscribe', [SubscriberController::class, 'subscribe']);
 });
 
 Route::get('/', function () {
