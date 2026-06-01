@@ -18,6 +18,7 @@ class PostController extends Controller
                 }])
                 ->latest()
                 ->get()
+            // is_full_html is appended automatically via $appends in Post model
         );
     }
 
@@ -29,6 +30,8 @@ class PostController extends Controller
                     $query->whereNull('parent_id')->with('replies')->latest();
                 }])
                 ->firstOrFail()
+            // is_full_html is appended automatically — Nuxt reads it to decide
+            // whether to use <iframe srcdoc> or v-html
         );
     }
 

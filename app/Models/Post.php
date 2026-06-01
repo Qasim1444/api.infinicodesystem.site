@@ -21,6 +21,26 @@ class Post extends Model
         'category_id',
     ];
 
+    /**
+     * Append is_full_html so it is included in every JSON response
+     * automatically — no changes needed in the controller.
+     */
+    protected $appends = ['is_full_html'];
+
+    /**
+     * Returns true when the content column contains a full HTML document
+     * (has <!DOCTYPE> or <html> tags).
+     *
+     * Nuxt uses this flag to decide:
+     *   true  → render with <iframe srcdoc>  (runs <style> & <script>)
+     *   false → render with v-html           (partial HTML, original behaviour)
+     */
+    public function getIsFullHtmlAttribute(): bool
+    {
+        return Str::containsAll(strtolower($this->content ?? ''), ['<html']) ||
+               str_contains(strtolower($this->content ?? ''), '<!doctype');
+    }
+
     protected static function booted()
     {
         static::creating(function ($post) {
