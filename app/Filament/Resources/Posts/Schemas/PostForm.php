@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Posts\Schemas;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
@@ -32,23 +33,14 @@ class PostForm
                     ->required()
                     ->searchable()
                     ->preload(),
-                RichEditor::make('content')
+                Textarea::make('content')
                     ->required()
                     ->columnSpanFull()
-                    ->toolbarButtons([
-                        'attachFiles',
-                        'blockquote',
-                        'bold',
-                        'bulletList',
-                        'codeBlock',
-                        'heading',
-                        'italic',
-                        'link',
-                        'orderedList',
-                        'redo',
-                        'strike',
-                        'undo',
-                    ]),
+                    ->rows(25)
+                    ->placeholder('Paste your content here:
+- Use raw HTML for styled content (tables, charts, custom layouts)
+- Or write plain text and use markdown/HTML formatting
+- Supports <style> tags and inline styles'),
                 FileUpload::make('image')
                     ->image()
                     ->disk('public')
